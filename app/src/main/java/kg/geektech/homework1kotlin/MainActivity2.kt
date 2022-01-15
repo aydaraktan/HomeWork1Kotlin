@@ -3,6 +3,7 @@ package kg.geektech.homework1kotlin
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import kg.geektech.homework1kotlin.databinding.ActivityMain2Binding
 
 
@@ -18,9 +19,13 @@ class MainActivity2 : AppCompatActivity() {
         binding.etInput.setText(text)
 
         binding.btnSend.setOnClickListener {
-            intent.putExtra("key2",binding.etInput.text.toString())
-            setResult(1,intent)
-            finish()
+            if(binding.etInput.text.toString().isBlank()){
+                Toast.makeText(this,"пустое поле", Toast.LENGTH_LONG).show()
+            }else {
+                intent.putExtra("key2", binding.etInput.text.toString())
+                setResult(1, intent)
+                finish()
+            }
         }
     }
 }
