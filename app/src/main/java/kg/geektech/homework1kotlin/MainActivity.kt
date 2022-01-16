@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     private val resultContract = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode==1){
-            var text2 = it.data?.getStringExtra("key2")
+            var text2 = it.data?.getStringExtra(key2)
             binding.etInput.setText(text2)
         }
     }
@@ -23,12 +23,18 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnSend.setOnClickListener {
             if(binding.etInput.text.toString().isBlank()){
-                Toast.makeText(this,"пустое поле",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,toastText,Toast.LENGTH_LONG).show()
             }else{
                 val intent = Intent(this,MainActivity2::class.java)
-                intent.putExtra("key",binding.etInput.text.toString())
+                intent.putExtra(key,binding.etInput.text.toString())
                 resultContract.launch(intent)
             }
         }
+    }
+
+    companion object{
+        const val key = "key"
+        const val key2 = "key2"
+        const val toastText = "пустое поле"
     }
 }

@@ -1,6 +1,5 @@
 package kg.geektech.homework1kotlin
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -15,17 +14,23 @@ class MainActivity2 : AppCompatActivity() {
         setContentView(binding.root)
         val intent = intent
 
-        val text: String? = intent.getStringExtra("key")
+        val text: String? = intent.getStringExtra(key)
         binding.etInput.setText(text)
 
         binding.btnSend.setOnClickListener {
             if(binding.etInput.text.toString().isBlank()){
-                Toast.makeText(this,"пустое поле", Toast.LENGTH_LONG).show()
+                Toast.makeText(this,toastText, Toast.LENGTH_LONG).show()
             }else {
-                intent.putExtra("key2", binding.etInput.text.toString())
+                intent.putExtra(key2, binding.etInput.text.toString())
                 setResult(1, intent)
                 finish()
             }
         }
+    }
+
+    companion object{
+        const val key = "key"
+        const val key2 = "key2"
+        const val toastText = "пустое поле"
     }
 }
